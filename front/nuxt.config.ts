@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     devtools: {enabled: false},
     modules: ["@nuxt/ui", '@nuxt/icon', '@nuxtjs/color-mode', '@vueuse/nuxt', 'dayjs-nuxt'],
     ssr: false,
+    nitro: {
+        preset: 'static'
+    },
     dayjs: {
         locales: ['zh'],
         defaultLocale: 'zh'
@@ -28,6 +31,7 @@ export default defineNuxtConfig({
         },
     },
     app: {
+        baseURL: '/', // 如果你部署在子路径下，需要改成 /子路径名/
         head: {
             meta: [
                 { name: "viewport", content: "width=device-width, initial-scale=1, user-scalable=no" },
@@ -43,23 +47,29 @@ export default defineNuxtConfig({
             ]
         }
     },
+    runtimeConfig: {
+        public: {
+            apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://moments.alamentation.xyz'
+            // apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://192.168.0.102:8888'
+        }
+    },
     vite: {
         server: {
             proxy: {
                 "/api": {
-                    target: "http://localhost:37892",
+                    target: "http://192.168.0.102:8888",
                     // changeOrigin: true,
                 },
                 "/upload": {
-                    target: "http://localhost:37892",
+                    target: "http://192.168.0.102:8888",
                     // changeOrigin: true,
                 },
                 "/rss": {
-                    target: "http://localhost:37892",
+                    target: "http://192.168.0.102:8888",
                     // changeOrigin: true,
                 },
                 "/swagger": {
-                    target: "http://localhost:37892",
+                    target: "http://192.168.0.102:8888",
                     // changeOrigin: true,
                 },
             },

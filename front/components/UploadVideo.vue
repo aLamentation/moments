@@ -139,7 +139,7 @@ const handleUploadVideo = async (files: FileList) => {
   })
   if (result.length) {
     toast.success("上传成功")
-    onlineUrl.value = result[0]
+    onlineUrl.value = "https://moments.alamentation.xyz"  + result[0]
   }
 }
 

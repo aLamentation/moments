@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 const props = defineProps<{ url: string }>()
-
-const videoUrl = computed(() => {
+const config = useRuntimeConfig()
+const videoUrl = config.public.apiBase + computed(() => {
   const url = new URL(props.url)
   url.searchParams.set("autoplay", "0")
   return url.toString()

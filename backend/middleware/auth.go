@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"strings"
-
+//     "net/http"
 	"github.com/golang-jwt/jwt/v5"
 	model "github.com/kingwrcy/moments/db"
 	"github.com/kingwrcy/moments/handler"
@@ -59,7 +59,7 @@ func Auth(injector do.Injector) echo.MiddlewareFunc {
 						return next(cc)
 					}
 				}
-				if strings.HasPrefix(path, "/upload") || strings.HasPrefix(path, "/api/user/profile/") {
+				if strings.HasPrefix(path, "/upload") || strings.HasPrefix(path, "/api") {
 					return next(cc)
 				}
 				return handler.FailResp(c, handler.TokenMissing)
@@ -67,3 +67,24 @@ func Auth(injector do.Injector) echo.MiddlewareFunc {
 		}
 	}
 }
+
+// func withCORS(next http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// // 		origin := r.Header.Get("Origin")
+//
+// 		// 可设置为允许所有源，或精确匹配
+// 		w.Header().Set("Access-Control-Allow-Origin", "https://moments.l-zs.com, https://moments.alamentation.xyz")
+// 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+// 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+// 		w.Header().Set("Access-Control-Allow-Credentials", "true")
+//
+// 		// 处理 OPTIONS 预检请求
+// 		if r.Method == http.MethodOptions {
+// 			w.WriteHeader(http.StatusOK)
+// 			return
+// 		}
+//
+// 		next.ServeHTTP(w, r)
+// 	})
+// }
+

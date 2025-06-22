@@ -1,10 +1,10 @@
 <template>
   <div class="douban-card-block">
     <a class="douban-card" :href="movie?.url" target="_blank">
-      <div class="douban-card-bgimg" :style="`background-image: url('${movie?.image}')`">
+      <div class="douban-card-bgimg" :style="`background-image: url('https://moments.alamentation.xyz${movie?.image}')`">
       </div>
       <div class="douban-card-left">
-        <div class="douban-card-img" :style="`background-image: url('${movie?.image}')`">
+        <div class="douban-card-img" :style="`background-image: url('https://moments.alamentation.xyz${movie?.image}')`">
         </div>
       </div>
       <div class="douban-card-right">

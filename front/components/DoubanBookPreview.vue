@@ -1,11 +1,11 @@
 <template>
   <div class="douban-card-block">
     <a class="douban-card" :href="book?.url" target="_blank">
-      <div class="douban-card-bgimg" :style="`background-image: url('${book?.image}')`">
+      <div class="douban-card-bgimg" :style="`background-image: url('https://moments.alamentation.xyz${book?.image}')`">
       </div>
       <div class="flex gap-2">
         <div class="douban-card-left">
-          <div class="douban-card-img" :style="`background-image: url('${book?.image}')`">
+          <div class="douban-card-img" :style="`background-image: url('https://moments.alamentation.xyz${book?.image}')`">
           </div>
         </div>
         <div class="douban-card-right w-fit max-w-[120px] overflow-hidden">

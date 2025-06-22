@@ -12,10 +12,10 @@
       <UInput type="file" size="sm" icon="i-heroicons-folder" @change="uploadCoverUrl"/>
       <div class="text-gray-500 text-sm my-2">或者输入在线地址</div>
       <UInput v-model="state.coverUrl" class="mb-2"/>
-      <img :src="state.coverUrl" class="w-full rounded object-cover" alt="" />
+      <img :src="state.coverUrl" class="w-full rounded object-cover" alt=""/>
     </UFormGroup>
     <UFormGroup label="登录名" name="username" :ui="{label:{base:'font-bold'}}">
-      <UInput v-model="state.username" disabled />
+      <UInput v-model="state.username" disabled/>
     </UFormGroup>
     <UFormGroup label="昵称" name="nickname" :ui="{label:{base:'font-bold'}}">
       <UInput v-model="state.nickname"/>
@@ -38,6 +38,7 @@ import type {UserVO} from "~/types";
 import {toast} from "vue-sonner";
 import {useUpload} from "~/utils";
 import {useGlobalState} from "~/store";
+
 const global = useGlobalState()
 const currentUser = useState<UserVO>('userinfo')
 const state = reactive({
@@ -71,7 +72,7 @@ const save = async () => {
 
 const uploadAvatarUrl = async (files: FileList) => {
   for (let i = 0; i < files.length; i++) {
-    if (files[i].type.indexOf("image") < 0){
+    if (files[i].type.indexOf("image") < 0) {
       toast.error("只能上传图片");
       return
     }
@@ -79,13 +80,13 @@ const uploadAvatarUrl = async (files: FileList) => {
   const result = await useUpload(files)
   if (result.length) {
     toast.success("上传成功")
-    state.avatarUrl = result[0]
+    state.avatarUrl = "https://moments.alamentation.xyz" + result[0]
   }
 }
 
 const uploadCoverUrl = async (files: FileList) => {
   for (let i = 0; i < files.length; i++) {
-    if (files[i].type.indexOf("image") < 0){
+    if (files[i].type.indexOf("image") < 0) {
       toast.error("只能上传图片");
       return
     }
@@ -93,12 +94,12 @@ const uploadCoverUrl = async (files: FileList) => {
   const result = await useUpload(files)
   if (result.length) {
     toast.success("上传成功")
-    state.coverUrl = result[0]
+    state.coverUrl = "https://moments.alamentation.xyz" + result[0]
   }
 }
 
 onMounted(async () => {
-  Object.assign(state,currentUser.value)
+  Object.assign(state, currentUser.value)
 })
 
 </script>

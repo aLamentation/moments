@@ -29,6 +29,14 @@ var staticFiles *embed.FS
 
 func newEchoEngine(_ do.Injector) (*echo.Echo, error) {
 	e := echo.New()
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+        AllowOrigins:     []string{"https://moments.l-zs.com", "https://moments.alamentation.xyz"}, // 前端实际部署地址
+        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders:     []string{"Content-Type", "Authorization", "x-api-token"},
+        AllowCredentials: true,
+    }))
+
+
 	return e, nil
 }
 
@@ -92,15 +100,28 @@ func main() {
 		}))
 	}
 
-	if cfg.CorsOrigin != "" {
-		allowOrigins := strings.Split(cfg.CorsOrigin, ",")
-		e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-			AllowCredentials: true,
-			AllowOrigins:     allowOrigins,
-			AllowMethods:     []string{http.MethodGet, http.MethodPost},
-			AllowHeaders:     []string{echo.HeaderContentType, "X-API-TOKEN"},
-		}))
-	}
+if cfg.CorsOrigin != "" {
+    allowOrigins := strings.Split(cfg.CorsOrigin, ",")
+    e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+        AllowCredentials: true,
+        AllowOrigins:     allowOrigins,
+        AllowMethods:     []string{
+            http.MethodGet,
+            http.MethodPost,
+            http.MethodPut,
+            http.MethodDelete,
+            http.MethodOptions, // 👈 必须加
+        },
+        AllowHeaders: []string{
+            echo.HeaderOrigin,
+            echo.HeaderContentType,
+            echo.HeaderAccept,
+            echo.HeaderAuthorization,
+            "X-API-TOKEN", // 👈 自定义头
+        },
+    }))
+}
+
 
 	migrateTo3(tx, myLogger)
 	migrateIframeVideoUrl(tx, myLogger)

@@ -59,9 +59,10 @@ const upload = async (files: FileList) => {
     total.value = totalSize
     current.value = index
   })
+  const config = useRuntimeConfig()
   if (result && result.length) {
     toast.success("上传成功")
-    imgs.value = [imgs.value, ...result].filter(Boolean).join(',')
+    imgs.value = "https://moments.alamentation.xyz" + [imgs.value, ...result].filter(Boolean).join(',')
   }
 }
 

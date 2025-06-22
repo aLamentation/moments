@@ -120,7 +120,7 @@ func (u UserHandler) Reg(c echo.Context) error {
 	user.UpdatedAt = &now
 	user.Nickname = req.Username
 	user.AvatarUrl = "/avatar.webp"
-	user.Slogan = "修道者，逆天而行，注定要一生孤独。"
+	user.Slogan = "个性签名/头像/背景可以在个人中心修改哦~"
 	user.CoverUrl = "/cover.webp"
 	if err := u.base.db.Save(&user).Error; err != nil {
 		u.base.log.Error().Msgf("注册用户异常:%s", err)

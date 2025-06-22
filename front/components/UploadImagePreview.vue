@@ -64,6 +64,7 @@ const route = useRoute();
 const el = ref(null);
 const props = defineProps<{ imgs?: string; imgConfigs?: ImgConfig[] }>();
 const emit = defineEmits(["removeImage", "dragImage"]);
+const config = useRuntimeConfig()
 const images = ref<string[]>((props.imgs || "").split(",").filter(Boolean));
 
 watch(props, () => {
@@ -71,7 +72,7 @@ watch(props, () => {
 });
 
 watch(images, () => {
-  emit("dragImage", images.value);
+  emit("dragImage", config.public.apiBase + images.value);
 });
 
 const removeImage = async (img: string) => {
