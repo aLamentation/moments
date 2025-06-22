@@ -1,0 +1,7 @@
+后端打包
+    docker build -t liuzongshuang/moments:v20250622 .
+    docker run -e JWT_KEY=b1f0e915-5127-46b8-975b-8a074a5ffa37 -p 8888:3000 -v /usr/lzs/moments:/app/data -d --name moments liuzongshuang/api-moments:v20250622
+前端打包
+    pnpm run build
+    pnpm run generate
+    front/.output
